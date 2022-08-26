@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Config rede">
+        <EditTextPreference
+            android:defaultValue="127.0.0.1"
+            android:key="smbIP"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:digits="0123456789."
+            android:title="IP" />
+        <EditTextPreference
+            android:defaultValue="WORKGROUP"
+            android:key="smbDomain"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Domínio" />
+        <EditTextPreference
+            android:defaultValue="user"
+            android:key="smbUser"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Usuário" />
+        <EditTextPreference
+            android:defaultValue="password"
+            android:key="smbPassword"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:title="Senha" />
+        <EditTextPreference
+            android:defaultValue="sharedFolder"
+            android:key="smbSharePath"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Compartilhamento" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="smbGuestLogin"
+            android:title="Login com conta visitante" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Preferências">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_monitorConn"
+            android:title="Detectar conexão automaticamente" />
+        <EditTextPreference
+            android:defaultValue="FASTPIC"
+            android:key="filePrefix"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Prefixo para nome de arquivo" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_filePrefix"
+            android:title="Ativar prefixo para nome de arquivo" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
