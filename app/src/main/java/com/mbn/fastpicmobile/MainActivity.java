@@ -142,18 +142,8 @@ public class MainActivity extends AppCompatActivity {
         CIFSContext ct;
 
         NtlmPasswordAuthenticator auth;
-        if (guestLogin == true) {
-            auth = new NtlmPasswordAuthenticator(svDomain,"",""); //anonymous login
-            Properties p = new Properties();
-            p.put("jcifs.smb.client.ipcSigningEnforced", "false");
-            p.put("jcifs.smb.client.useExtendedSecurity", "false");
-            baseCxt = new BaseContext(new PropertyConfiguration(p)).withGuestCrendentials();
-            ct = baseCxt;
-        }
-        else {
-            auth = new NtlmPasswordAuthenticator(svDomain, userName, password);
-            ct = baseCxt.withCredentials(auth);
-        }
+        auth = new NtlmPasswordAuthenticator(userName, password);
+        ct = baseCxt.withCredentials(auth);
 
         if (addSuffix)
         {
@@ -184,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("completed ...nice !");
 
         Toast.makeText(this, "Enviado "+imageFileName+".jpg", Toast.LENGTH_LONG).show();
-
+        fileSavedPic.deleteOnExit();
 //        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 //        alertDialog.setTitle("Envio servidor SMB");
 //        alertDialog.setMessage("Envio ok!");
