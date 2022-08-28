@@ -2,10 +2,12 @@ package com.mbn.fastpicmobile;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -74,7 +76,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.about:
-                Toast.makeText(this, "= FastPic Mobile = ", Toast.LENGTH_SHORT).show();
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Sobre");
+                alertDialog.setMessage("= FastPic Mobile = ");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -110,11 +121,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     sendFileSMBConnection();
-                } catch (MalformedURLException ex) {
-                    ex.printStackTrace();
-                } catch (UnknownHostException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (Exception ex) {
+                    System.out.println("erro "+ex.getMessage());
+                            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                            alertDialog.setTitle("Erro de conexão");
+                            alertDialog.setMessage("Ocorreu um erro, por favor verifique as configurações e permissões do usuário no servidor, e a conexão do dispositivo com a rede.\n\n"+ex.getMessage());
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+
                     ex.printStackTrace();
                 }
             }
@@ -125,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
         Drawable background = imgBtn.getBackground();
         Drawable drawable   = imgBtn.getDrawable();
+        imgBtn.setEnabled(enabled);
 
         if (enabled) {
             if (background != null)
@@ -146,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Capture uma foto antes de enviar", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        System.out.println("sendFileSMBConnection");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         String svDomain = sharedPreferences.getString("smbDomain","WORKGROUP");
@@ -244,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
         //if image.length() == 0 //error taking picture
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
-        setEnabledImageButton(btnSendSMB, true);
+
         return image;
     }
 
@@ -285,6 +305,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
               setPic();
+              setEnabledImageButton(btnSendSMB, true);
         }
     }
 }
