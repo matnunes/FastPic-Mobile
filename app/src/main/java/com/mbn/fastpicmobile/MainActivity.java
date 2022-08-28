@@ -6,12 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,7 +22,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,7 +35,6 @@ import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
 
 import jcifs.CIFSContext;
 import jcifs.config.PropertyConfiguration;
@@ -103,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSendSMB = (ImageButton)findViewById(R.id.sendSMB);
+        setEnabledImageButton(btnSendSMB, false);
+
 
         btnSendSMB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +119,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setEnabledImageButton(ImageButton imgBtn, boolean enabled) {
+
+        Drawable background = imgBtn.getBackground();
+        Drawable drawable   = imgBtn.getDrawable();
+
+        if (enabled) {
+            if (background != null)
+                imgBtn.getBackground().setColorFilter(null);
+            if (drawable != null)
+                imgBtn.getBackground().setColorFilter(null);
+        }
+        else {
+            if (background != null)
+                imgBtn.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
+            if (drawable != null)
+                imgBtn.getDrawable().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
+        }
     }
 
     private void sendFileSMBConnection() throws IOException {
@@ -174,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("completed ...nice !");
 
         Toast.makeText(this, "Enviado "+imageFileName+".jpg", Toast.LENGTH_LONG).show();
-        fileSavedPic.deleteOnExit();
+
 //        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 //        alertDialog.setTitle("Envio servidor SMB");
 //        alertDialog.setMessage("Envio ok!");
@@ -214,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
         imageFileName = timeStamp;
+        clearCache(getExternalFilesDir(Environment.DIRECTORY_PICTURES));
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -223,7 +244,15 @@ public class MainActivity extends AppCompatActivity {
         //if image.length() == 0 //error taking picture
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
+        setEnabledImageButton(btnSendSMB, true);
         return image;
+    }
+
+    private void clearCache(File dir) {
+        File[] files = dir.listFiles();
+
+        for (File file : files)
+            file.delete();
     }
 
     private void setPic() {
