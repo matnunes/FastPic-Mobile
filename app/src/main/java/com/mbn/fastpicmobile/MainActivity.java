@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -163,20 +164,19 @@ public class MainActivity extends AppCompatActivity {
     private void sendFileSMBConnection() throws IOException {
         if (imageFileName == "")
         {
-            Toast.makeText(this, "Capture uma foto antes de enviar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Capture uma foto antes de enviar", Toast.LENGTH_LONG).show();
             return;
         }
+
         System.out.println("sendFileSMBConnection");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         String svDomain = sharedPreferences.getString("smbDomain","WORKGROUP");
         String userName = sharedPreferences.getString("smbUser","");
         String password = sharedPreferences.getString("smbPassword","");
-        String remoteFile = "/" + sharedPreferences.getString("smbSharePath","")+"/";
+        String remoteFile = sharedPreferences.getString("smbSharePath","")+"/";
         String remoteURL = "smb://"+sharedPreferences.getString("smbIP","127.0.0.1")+"/";
-        boolean guestLogin = sharedPreferences.getBoolean("smbGuestLogin",false);
         boolean addSuffix = sharedPreferences.getBoolean("switch_filePrefix",false);
-        //DESKTOP-RM6MO8I
 
         CIFSContext baseCxt = new BaseContext(new PropertyConfiguration(System.getProperties()));
         CIFSContext ct;
@@ -185,24 +185,27 @@ public class MainActivity extends AppCompatActivity {
         auth = new NtlmPasswordAuthenticator(userName, password);
         ct = baseCxt.withCredentials(auth);
 
+        String imageFileNamePrefix = "";
         if (addSuffix)
         {
-            imageFileName = sharedPreferences.getString("filePrefix","")+"_"+imageFileName;
+            imageFileNamePrefix = sharedPreferences.getString("filePrefix","");
+            if(!TextUtils.isEmpty(imageFileNamePrefix))
+                imageFileNamePrefix += "_";
         }
 
         caseId = ((EditText)findViewById(R.id.editIdCaso)).getText().toString();
-        String path = "";
-        if (caseId != "") {
-            SmbFile smbFileDir = new SmbFile(remoteURL+remoteFile+ caseId, ct);
+        String path = remoteURL + remoteFile;
+        if (!TextUtils.isEmpty(caseId)) {
+            SmbFile smbFileDir = new SmbFile(remoteURL + remoteFile + caseId, ct);
             if (!smbFileDir.exists()) {
                 smbFileDir.mkdir();
             }
-
-            if (caseId != "")
-                imageFileName = caseId+"/"+imageFileName;
+            path += caseId + "/" + imageFileNamePrefix + imageFileName + ".jpg";
         }
-
-        path=remoteURL+remoteFile+imageFileName+".jpg";
+        else
+        {
+            path += imageFileNamePrefix + imageFileName + ".jpg";
+        }
 
         SmbFile smbFile = new SmbFile(path, ct);
 
@@ -213,18 +216,7 @@ public class MainActivity extends AppCompatActivity {
         smbfos.close();
         System.out.println("completed ...nice !");
 
-        Toast.makeText(this, "Enviado "+imageFileName+".jpg", Toast.LENGTH_LONG).show();
-
-//        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-//        alertDialog.setTitle("Envio servidor SMB");
-//        alertDialog.setMessage("Envio ok!");
-//        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//        alertDialog.show();
+        Toast.makeText(this, "Enviado "+imageFileNamePrefix+imageFileName+".jpg", Toast.LENGTH_LONG).show();
     }
 
     private void openCamera() {

@@ -9,7 +9,7 @@
             android:singleLine="true"
             android:inputType="number"
             android:digits="0123456789."
-            android:title="IP" />
+            android:title="Servidor" />
         <EditTextPreference
             android:defaultValue="WORKGROUP"
             android:key="smbDomain"
@@ -35,10 +35,6 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Compartilhamento" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="smbGuestLogin"
-            android:title="Login com conta visitante" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Preferências">
         <SwitchPreference
