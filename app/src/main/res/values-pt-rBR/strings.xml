@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FastPic Mobile</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="input_text_caso">Caso</string>
+    <string name="menu_text_sobre">Sobre</string>
+    <string name="category_text_config_rede">Config rede</string>
+    <string name="category_text_preferencias">Preferências</string>
+    <string name="input_text_servidor">Servidor</string>
+    <string name="input_text_dominio">Domínio</string>
+    <string name="input_text_usuario">Usuário</string>
+    <string name="input_text_senha">Senha</string>
+    <string name="input_text_compartilhamento">Compartilhamento</string>
+    <string name="switch_detectar_conexao">Detectar conexão automaticamente</string>
+    <string name="input_text_prefixo">Prefixo para nome de arquivo</string>
+    <string name="switch_prefixo">Ativar prefixo para nome de arquivo</string>
+    <string name="str_message_error_conn_title">Erro de conexão</string>
+    <string name="str_message_error_capture">Capture uma foto antes de enviar</string>
+    <string name="str_message_error_conn">Ocorreu um erro, por favor verifique as configurações e permissões do usuário, e a conexão do dispositivo com a rede</string>
+    <string name="menu_text_configuracoes">Configurações</string>
+    <string name="str_message_about_title">Sobre</string>
+    <string name="str_toast_sent_Ok">Enviado</string>
+</resources>

@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "com.mbn.fastpicmobile"
-        minSdkVersion 30
-        targetSdkVersion 30
+        minSdkVersion 28
+        targetSdkVersion 31
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

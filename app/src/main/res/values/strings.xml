@@ -1,19 +1,52 @@
 <resources>
-    <string name="app_name">FastPic Mobile</string>
+    <string name="app_name" translatable="false">FastPic Mobile</string>
     <string name="title_activity_settings">Configurações</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <!-- Main Activity -->
+    <string name="input_text_caso">Caso</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Menu -->
+    <string name="menu_text_configuracoes">Configurações</string>
+    <string name="menu_text_sobre">Sobre</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <!-- Settings Activity -->
+    <string name="category_text_config_rede">Config rede</string>
+    <string name="category_text_preferencias">Preferências</string>
+    <string name="input_text_servidor">Servidor</string>
+    <string name="input_text_dominio">Domínio</string>
+    <string name="input_text_usuario">Usuário</string>
+    <string name="input_text_senha">Senha</string>
+    <string name="input_text_compartilhamento">Compartilhamento</string>
+    <string name="switch_detectar_conexao">Detectar conexão automaticamente</string>
+    <string name="input_text_prefixo">Prefixo para nome de arquivo</string>
+    <string name="switch_prefixo">Ativar prefixo para nome de arquivo</string>
+
+    <!-- Messages -->
+    <string name="str_message_about_title">Sobre</string>
+    <string name="str_message_about" translatable="false">-=FastPic Mobile=-
+        \nFastPic Mobile is FREE software, licensed under GNU General Public License version 3 (GPLv3). Copyright (C) 2022, Mateus Bisotto Nunes.
+        \n
+        \nThis program is free software: you can redistribute it and/or modify
+        \nit under the terms of the GNU General Public License as published by
+        \nthe Free Software Foundation, version 3 of the License, or (at your option) any later version.
+        \n
+        \nThis program is distributed in the hope that it will be useful,
+        \nbut WITHOUT ANY WARRANTY; without even the implied warranty of
+        \nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        \nGNU General Public License for more details.
+        \n
+        \nYou should have received a copy of the GNU General Public License
+        \nalong with this program.  If not, see http://www.gnu.org/licenses/.
+        \n
+        \n-=Source code=-
+        \nSource code is available at https://github.com/matnunes/FastPic-Mobile
+        \n
+        \n-=Libraries=-
+        \njcifs-ng- Open Source client library that implements the CIFS/SMB networking protocol. Licensed under LGPLv2.1.
+
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="str_message_error_conn_title">Erro de conexão</string>
+    <string name="str_message_error_conn">Ocorreu um erro, por favor verifique as configurações e permissões do usuário, e a conexão do dispositivo com a rede</string>
+    <string name="str_toast_sent_Ok">Enviado</string>
+    <string name="str_message_error_capture">Capture uma foto antes de enviar</string>
 </resources>

@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.about:
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                alertDialog.setTitle("Sobre");
-                alertDialog.setMessage("= FastPic Mobile = ");
+                alertDialog.setTitle(getString(R.string.str_message_about_title));
+                alertDialog.setMessage(getString(R.string.str_message_about));
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -123,17 +123,16 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     sendFileSMBConnection();
                 } catch (Exception ex) {
-                    System.out.println("erro "+ex.getMessage());
-                            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                            alertDialog.setTitle("Erro de conexão");
-                            alertDialog.setMessage("Ocorreu um erro, por favor verifique as configurações e permissões do usuário no servidor, e a conexão do dispositivo com a rede.\n\n"+ex.getMessage());
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-                            alertDialog.show();
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle(getString(R.string.str_message_error_conn_title));
+                    alertDialog.setMessage(getString(R.string.str_message_error_conn)+"\n\n"+ex.getMessage());
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
 
                     ex.printStackTrace();
                 }
@@ -164,11 +163,11 @@ public class MainActivity extends AppCompatActivity {
     private void sendFileSMBConnection() throws IOException {
         if (imageFileName == "")
         {
-            Toast.makeText(this, "Capture uma foto antes de enviar", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.str_message_error_capture), Toast.LENGTH_LONG).show();
             return;
         }
 
-        System.out.println("sendFileSMBConnection");
+        //System.out.println("sendFileSMBConnection");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         String svDomain = sharedPreferences.getString("smbDomain","WORKGROUP");
@@ -214,9 +213,8 @@ public class MainActivity extends AppCompatActivity {
 
         smbfos.write(Files.readAllBytes(fileSavedPic.toPath()));
         smbfos.close();
-        System.out.println("completed ...nice !");
 
-        Toast.makeText(this, "Enviado "+imageFileNamePrefix+imageFileName+".jpg", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.str_toast_sent_Ok)+" "+imageFileNamePrefix+imageFileName+".jpg", Toast.LENGTH_LONG).show();
     }
 
     private void openCamera() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="Config rede">
+    <PreferenceCategory android:title="@string/category_text_config_rede">
         <EditTextPreference
             android:defaultValue="127.0.0.1"
             android:key="smbIP"
@@ -9,48 +9,48 @@
             android:singleLine="true"
             android:inputType="number"
             android:digits="0123456789."
-            android:title="Servidor" />
+            android:title="@string/input_text_servidor" />
         <EditTextPreference
             android:defaultValue="WORKGROUP"
             android:key="smbDomain"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Domínio" />
+            android:title="@string/input_text_dominio" />
         <EditTextPreference
             android:defaultValue="user"
             android:key="smbUser"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Usuário" />
+            android:title="@string/input_text_usuario" />
         <EditTextPreference
             android:defaultValue="password"
             android:key="smbPassword"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:inputType="textPassword"
-            android:title="Senha" />
+            android:title="@string/input_text_senha" />
         <EditTextPreference
             android:defaultValue="sharedFolder"
             android:key="smbSharePath"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Compartilhamento" />
+            android:title="@string/input_text_compartilhamento" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Preferências">
+    <PreferenceCategory android:title="@string/category_text_preferencias">
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_monitorConn"
-            android:title="Detectar conexão automaticamente" />
+            android:title="@string/switch_detectar_conexao" />
         <EditTextPreference
             android:defaultValue="FASTPIC"
             android:key="filePrefix"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Prefixo para nome de arquivo" />
+            android:title="@string/input_text_prefixo" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_filePrefix"
-            android:title="Ativar prefixo para nome de arquivo" />
+            android:title="@string/switch_prefixo" />
     </PreferenceCategory>
 
 </PreferenceScreen>
