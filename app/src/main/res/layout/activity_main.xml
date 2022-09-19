@@ -44,7 +44,7 @@
         android:hint="@string/input_text_caso"
         android:inputType="textShortMessage|number|text"
         android:singleLine="true"
-        android:textAlignment="center"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myPicture" />

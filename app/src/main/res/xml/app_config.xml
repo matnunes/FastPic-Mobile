@@ -37,10 +37,11 @@
             android:title="@string/input_text_compartilhamento" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/category_text_preferencias">
-        <SwitchPreference
+        <!--<SwitchPreference
             android:defaultValue="false"
             android:key="switch_monitorConn"
             android:title="@string/switch_detectar_conexao" />
+        -->
         <EditTextPreference
             android:defaultValue="FASTPIC"
             android:key="filePrefix"

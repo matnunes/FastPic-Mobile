@@ -121,7 +121,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    setEnabledImageButton(btnSendSMB, false);
+                    setEnabledImageButton(btnFoto, false);
+
                     sendFileSMBConnection();
+
                 } catch (Exception ex) {
                     AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                     alertDialog.setTitle(getString(R.string.str_message_error_conn_title));
@@ -135,6 +139,10 @@ public class MainActivity extends AppCompatActivity {
                     alertDialog.show();
 
                     ex.printStackTrace();
+                }
+                finally {
+                    setEnabledImageButton(btnSendSMB, true);
+                    setEnabledImageButton(btnFoto, true);
                 }
             }
         });
@@ -169,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
 
         //System.out.println("sendFileSMBConnection");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
         String svDomain = sharedPreferences.getString("smbDomain","WORKGROUP");
         String userName = sharedPreferences.getString("smbUser","");
         String password = sharedPreferences.getString("smbPassword","");
@@ -213,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
 
         smbfos.write(Files.readAllBytes(fileSavedPic.toPath()));
         smbfos.close();
-
         Toast.makeText(this, getString(R.string.str_toast_sent_Ok)+" "+imageFileNamePrefix+imageFileName+".jpg", Toast.LENGTH_LONG).show();
     }
 

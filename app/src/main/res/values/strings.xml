@@ -24,7 +24,8 @@
     <!-- Messages -->
     <string name="str_message_about_title">Sobre</string>
     <string name="str_message_about" translatable="false">-=FastPic Mobile=-
-        \nFastPic Mobile is FREE software, licensed under GNU General Public License version 3 (GPLv3). Copyright (C) 2022, Mateus Bisotto Nunes.
+        \nFastPic Mobile is FREE software, licensed under GNU General Public License version 3 (GPLv3).
+        \nCopyright (C) 2022, Mateus Bisotto Nunes.
         \n
         \nThis program is free software: you can redistribute it and/or modify
         \nit under the terms of the GNU General Public License as published by
