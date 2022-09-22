@@ -7,5 +7,6 @@ Allows to quickly snap a picture and send it to a shared folder (like Windows sh
 * Optional filename prefix for user/device identification
 * Filename records when the picture was taken
 
-FastPic Mobile is FREE software licensed under GNU General Public License versão 3 (GPLv3). 
-Source code available at https://github.com/matnunes/FastPic-Mobile
+FastPic Mobile is FREE software licensed under [GNU General Public License version 3](https://www.gnu.org/licenses/gpl-3.0.en.html) (GPLv3). 
+
+Source code and builds available at https://github.com/matnunes/FastPic-Mobile
