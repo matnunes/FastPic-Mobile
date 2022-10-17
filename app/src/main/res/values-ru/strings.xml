@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FastPic Mobile</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="input_text_caso">Инцидент</string>
+    <string name="menu_text_configuracoes">Настройки</string>
+    <string name="menu_text_sobre">Информация</string>
+    <string name="category_text_config_rede">Сетевые настройки</string>
+    <string name="category_text_preferencias">Предпочтения</string>
+    <string name="input_text_servidor">Сервер</string>
+    <string name="input_text_dominio">Домен</string>
+    <string name="input_text_usuario">Пользователь</string>
+    <string name="input_text_senha">Пароль</string>
+    <string name="input_text_compartilhamento">Общая папка</string>
+    <string name="switch_detectar_conexao">Monitor connection</string>
+    <string name="input_text_prefixo">Префикс имени файла</string>
+    <string name="switch_prefixo">Включить префикс имени файла</string>
+    <string name="switch_caseId_complex">Включить персонажей для инцидента</string>
+    <string name="str_message_about_title">Информация</string>
+    <string name="str_message_error_conn_title">Ошибка соединения</string>
+    <string name="str_message_error_conn">Произошла ошибка, проверьте настройки сети, разрешения пользователя и подключение устройства</string>
+    <string name="str_toast_sent_Ok">Отправил</string>
+    <string name="str_message_error_capture">Сделайте фото перед отправкой</string>
+</resources>

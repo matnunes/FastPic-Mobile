@@ -8,8 +8,8 @@ android {
         applicationId "com.mbn.fastpicmobile"
         minSdkVersion 28
         targetSdkVersion 31
-        versionCode 3
-        versionName "1.22.1"
+        versionCode 4
+        versionName "1.22.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

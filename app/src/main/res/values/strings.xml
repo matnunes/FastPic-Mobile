@@ -20,6 +20,7 @@
     <string name="switch_detectar_conexao">Detectar conexão automaticamente</string>
     <string name="input_text_prefixo">Prefixo para nome de arquivo</string>
     <string name="switch_prefixo">Ativar prefixo para nome de arquivo</string>
+    <string name="switch_caseId_complex">Permitir letras e números para identificador do caso</string>
 
     <!-- Messages -->
     <string name="str_message_about_title">Sobre</string>

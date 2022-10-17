@@ -20,4 +20,5 @@
     <string name="str_toast_sent_Ok">Sent</string>
     <string name="str_message_error_capture">Capture a photo before sending</string>
     <string name="str_message_error_conn">There has been an error, please check network settings, user permissions and device connectivity</string>
+    <string name="switch_caseId_complex">Allow characters for case id</string>
 </resources>

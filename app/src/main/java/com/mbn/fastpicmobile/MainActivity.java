@@ -20,6 +20,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,17 +54,21 @@ public class MainActivity extends AppCompatActivity {
     private ImageView picPreview;
     private ImageButton btnFoto;
     private ImageButton btnSendSMB;
+    private EditText caseIdEditBox;
     private Bitmap myBitmap;
     private String currentPhotoPath;
     private FileOutputStream fileOutputStream;
+    private SharedPreferences sharedPreferences;
     private String filePath;
     private String imageFileName;
     String timeStamp;
     private Uri mPhotoUri;
     private String caseId;
+    private String invalidChars = "@~#^|$%&*!/<>:'+={}?\\\"";
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_FILE_URI = 100;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_CONTENT_RESOLVER = 101;
+    private static final int DEFAULT_INPUT_TEXT_TYPE = 67;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         imageFileName = "";
 
@@ -116,6 +124,15 @@ public class MainActivity extends AppCompatActivity {
         btnSendSMB = (ImageButton)findViewById(R.id.sendSMB);
         setEnabledImageButton(btnSendSMB, false);
 
+        caseIdEditBox = (EditText)findViewById(R.id.editIdCaso);
+        setInputText(sharedPreferences.getBoolean("switch_caseId_text",false));
+
+        caseIdEditBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setInputText(sharedPreferences.getBoolean("switch_caseId_text",false));
+            }
+        });
 
         btnSendSMB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +165,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setInputText(boolean complexText)
+    {
+        if (complexText) {
+            caseIdEditBox.setInputType(InputType.TYPE_CLASS_TEXT);
+        }
+        else
+        {
+            caseIdEditBox.setInputType(DEFAULT_INPUT_TEXT_TYPE);
+        }
+        caseIdEditBox.setFilters(new InputFilter[] { filter });
+    }
+
+    private InputFilter filter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source,
+                                   int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && invalidChars.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
+
     private void setEnabledImageButton(ImageButton imgBtn, boolean enabled) {
 
         Drawable background = imgBtn.getBackground();
@@ -176,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //System.out.println("sendFileSMBConnection");
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String svDomain = sharedPreferences.getString("smbDomain","WORKGROUP");
         String userName = sharedPreferences.getString("smbUser","");
         String password = sharedPreferences.getString("smbPassword","");
@@ -199,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 imageFileNamePrefix += "_";
         }
 
-        caseId = ((EditText)findViewById(R.id.editIdCaso)).getText().toString();
+        caseId = ((EditText)findViewById(R.id.editIdCaso)).getText().toString().trim();
         String path = remoteURL + remoteFile;
         if (!TextUtils.isEmpty(caseId)) {
             SmbFile smbFileDir = new SmbFile(remoteURL + remoteFile + caseId, ct);

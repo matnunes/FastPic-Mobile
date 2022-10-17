@@ -20,4 +20,5 @@
     <string name="menu_text_configuracoes">Configurações</string>
     <string name="str_message_about_title">Sobre</string>
     <string name="str_toast_sent_Ok">Enviado</string>
+    <string name="switch_caseId_complex">Permitir letras e números para identificador do caso</string>
 </resources>
