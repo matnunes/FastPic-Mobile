@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.mbn.fastpicmobile"
         minSdkVersion 28
-        targetSdkVersion 31
-        versionCode 4
-        versionName "1.22.5"
+        targetSdkVersion 33
+        versionCode 5
+        versionName "1.23.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,6 +20,7 @@ android {
             }
         }
     }
+    namespace 'com.mbn.fastpicmobile'
 }
 
 dependencies {
