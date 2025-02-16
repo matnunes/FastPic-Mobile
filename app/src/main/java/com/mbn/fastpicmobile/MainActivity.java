@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private Uri mPhotoUri;
     private String caseId;
     private String invalidChars = "@~#^|$%&*!/<>:'+={}?\\\"";
+    private Vibrator hapticFeedback;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_FILE_URI = 100;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_CONTENT_RESOLVER = 101;
@@ -113,10 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
         picPreview = (ImageView)findViewById(R.id.myPicture);
         btnFoto = (ImageButton)findViewById(R.id.startCamera);
+        hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         btnFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hapticFeedback.vibrate(75);
                 openCamera();
             }
         });
@@ -138,12 +142,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    hapticFeedback.vibrate(75);
                     setEnabledImageButton(btnSendSMB, false);
                     setEnabledImageButton(btnFoto, false);
 
                     sendFileSMBConnection();
 
                 } catch (Exception ex) {
+                    hapticFeedback.vibrate(250);
+
                     AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                     alertDialog.setTitle(getString(R.string.str_message_error_conn_title));
                     alertDialog.setMessage(getString(R.string.str_message_error_conn)+"\n\n"+ex.getMessage());
@@ -261,6 +268,8 @@ public class MainActivity extends AppCompatActivity {
 
         smbfos.write(Files.readAllBytes(fileSavedPic.toPath()));
         smbfos.close();
+
+        hapticFeedback.vibrate(75);
         Toast.makeText(this, getString(R.string.str_toast_sent_Ok)+" "+imageFileNamePrefix+imageFileName+".jpg", Toast.LENGTH_LONG).show();
     }
 
